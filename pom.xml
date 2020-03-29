@@ -9,6 +9,7 @@
         <module>camunda-core</module>
         <module>camunda-worker</module>
         <module>camunda-email</module>
+        <module>camunda-email-connector</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
