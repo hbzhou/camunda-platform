@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_07qd6l2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <bpmn:process id="Process_0c03kfs" name="User Login" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0qpwzqb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0qpwzqb" sourceRef="StartEvent_1" targetRef="Activity_0ppnh5b" />
+    <bpmn:sequenceFlow id="Flow_17hs13s" sourceRef="Activity_0ppnh5b" targetRef="Activity_0pgr0er" />
+    <bpmn:sequenceFlow id="Flow_1ucergk" sourceRef="Activity_0pgr0er" targetRef="Event_1s7s5ft" />
+    <bpmn:endEvent id="Event_1s7s5ft">
+      <bpmn:incoming>Flow_1ucergk</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1x1mpu3" />
+    </bpmn:endEvent>
+    <bpmn:userTask id="Activity_0ppnh5b" name="User Login" camunda:assignee="jeremy">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="UserName" label="Username" type="string" />
+          <camunda:formField id="Password" label="Password" type="string" />
+        </camunda:formData>
+        <camunda:taskListener class="com.itsz.camunda.email.TaskCreatedNotificationListener" event="create" />
+        <camunda:executionListener class="com.itsz.camunda.email.TaskExecutionNotificationListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0qpwzqb</bpmn:incoming>
+      <bpmn:outgoing>Flow_17hs13s</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_0pgr0er" name="Manager Approve" camunda:assignee="jeremy">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Username" label="Username" type="string" />
+          <camunda:formField id="Approved" label="Approved" type="boolean" />
+        </camunda:formData>
+        <camunda:executionListener class="com.itsz.camunda.email.TaskExecutionNotificationListener" event="start" />
+        <camunda:executionListener class="com.itsz.camunda.email.TaskExecutionNotificationListener" event="end" />
+        <camunda:taskListener class="com.itsz.camunda.email.TaskCreatedNotificationListener" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17hs13s</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ucergk</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0c03kfs">
+      <bpmndi:BPMNEdge id="Flow_1ucergk_di" bpmnElement="Flow_1ucergk">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17hs13s_di" bpmnElement="Flow_17hs13s">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qpwzqb_di" bpmnElement="Flow_0qpwzqb">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0w3wi3y_di" bpmnElement="Event_1s7s5ft">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0baglvi_di" bpmnElement="Activity_0ppnh5b">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hm990a_di" bpmnElement="Activity_0pgr0er">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

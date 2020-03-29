@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: camunda-email-application
+  mail:
+    host: smtp.126.com
+    port: 25
+    username: jeremygilbert@126.com
+    password: Huawei12
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  thymeleaf:
+    prefix: classpath:/static/
+
+server:
+  port: 8082
+
+
+camunda:
+  bpm:
+    admin-user:
+      id: jeremy
+      password: jeremy
+      firstName: jeremy
+      filter:
+        create: All tasks
+    authorization:
+      enabled: true

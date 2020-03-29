@@ -8,6 +8,7 @@
     <modules>
         <module>camunda-core</module>
         <module>camunda-worker</module>
+        <module>camunda-email</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -16,6 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mybatis.spring.boot.verison>1.3.0</mybatis.spring.boot.verison>
+        <camunda.bpm.mail.version>1.2.0</camunda.bpm.mail.version>
+        <version.servlet>3.0.1</version.servlet>
+        <version.camunda>7.12.0</version.camunda>
+
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -27,9 +32,21 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.camunda.bpm</groupId>
+                <artifactId>camunda-bom</artifactId>
+                <version>${version.camunda}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.spring.boot.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.camunda.bpm.extension</groupId>
+                <artifactId>camunda-bpm-mail-core</artifactId>
+                <version>${camunda.bpm.mail.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
