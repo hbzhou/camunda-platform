@@ -10,6 +10,7 @@
         <module>camunda-worker</module>
         <module>camunda-email</module>
         <module>camunda-email-connector</module>
+        <module>camunda-webjar</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>
@@ -51,25 +52,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <layout>ZIP</layout>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     <repositories>
         <repository>
             <id>alimaven</id>

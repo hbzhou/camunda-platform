@@ -19,6 +19,7 @@ spring:
 server:
   port: 8081
 
+
 camunda:
   bpm:
     admin-user:
@@ -29,3 +30,6 @@ camunda:
         create: All tasks
     authorization:
       enabled: true
+
+
+

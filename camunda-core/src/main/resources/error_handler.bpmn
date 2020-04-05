@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_04x79zp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <bpmn:process id="Process_0vwx4z0" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1fv2c83</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1fv2c83" sourceRef="StartEvent_1" targetRef="Activity_0fsqmzr" />
+    <bpmn:userTask id="Activity_0fsqmzr" name="Login">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="username" label="Username" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="password" label="Password" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+        <camunda:executionListener class="com.itsz.camunda.core.ExcutioinListen" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1fv2c83</bpmn:incoming>
+      <bpmn:outgoing>Flow_059cj2s</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0hawdqp" sourceRef="Event_1w9uz0n" targetRef="Activity_0uctxur" />
+    <bpmn:userTask id="Activity_0uctxur" name="HanleError">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="errorMsg" label="ErrorMsg" type="string" defaultValue="#{ErrorMessage}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="errorCode" label="ErrorCode" type="string" defaultValue="#{Error_Msg}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0hawdqp</bpmn:incoming>
+      <bpmn:outgoing>Flow_12arcr1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_059cj2s" sourceRef="Activity_0fsqmzr" targetRef="Activity_1keoon5" />
+    <bpmn:sequenceFlow id="Flow_1i0v6w2" sourceRef="Activity_1keoon5" targetRef="Event_1ex8y80" />
+    <bpmn:userTask id="Activity_1keoon5" name="someone does sth">
+      <bpmn:incoming>Flow_059cj2s</bpmn:incoming>
+      <bpmn:outgoing>Flow_1i0v6w2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_12arcr1" sourceRef="Activity_0uctxur" targetRef="Event_1o2r2v1" />
+    <bpmn:endEvent id="Event_1ex8y80">
+      <bpmn:incoming>Flow_1i0v6w2</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_0cnx3zn" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_1o2r2v1">
+      <bpmn:incoming>Flow_12arcr1</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1a8v3hw" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_1w9uz0n" attachedToRef="Activity_0fsqmzr">
+      <bpmn:outgoing>Flow_0hawdqp</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1npbbpk" errorRef="Error_09dct2g" />
+    </bpmn:boundaryEvent>
+  </bpmn:process>
+  <bpmn:error id="Error_09dct2g" name="Error_Msg" errorCode="errorCode" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0vwx4z0">
+      <bpmndi:BPMNEdge id="Flow_1fv2c83_di" bpmnElement="Flow_1fv2c83">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hawdqp_di" bpmnElement="Flow_0hawdqp">
+        <di:waypoint x="320" y="175" />
+        <di:waypoint x="320" y="240" />
+        <di:waypoint x="390" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_059cj2s_di" bpmnElement="Flow_059cj2s">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i0v6w2_di" bpmnElement="Flow_1i0v6w2">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12arcr1_di" bpmnElement="Flow_12arcr1">
+        <di:waypoint x="490" y="240" />
+        <di:waypoint x="542" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hkyjzn_di" bpmnElement="Activity_0fsqmzr">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j2j8nn_di" bpmnElement="Activity_0uctxur">
+        <dc:Bounds x="390" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0icxd6h_di" bpmnElement="Activity_1keoon5">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1yhdvta_di" bpmnElement="Event_1ex8y80">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rfaxjm_di" bpmnElement="Event_1o2r2v1">
+        <dc:Bounds x="542" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f16v0i_di" bpmnElement="Event_1w9uz0n">
+        <dc:Bounds x="302" y="139" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
